@@ -1,4 +1,4 @@
-# Morita — ToadAid Builder Page
+# Aqio — ToadAid Builder Page
 
 This repository powers Morita’s GitHub Pages site:
 
@@ -6,13 +6,13 @@ https://aqio97.github.io
 
 ## About
 
-Morita is a ToadAid builder — part of the growing circle helping shape public-good tools, agent identity, and community infrastructure for the Toadgang ecosystem.
+Aqio is a ToadAid builder — part of the growing circle helping shape public-good tools, agent identity, and community infrastructure for the Toadgang ecosystem.
 
 This page is a simple public home for Morita’s builder presence.
 
 ## Builder Role
 
-Morita’s work is part of the broader ToadAid mission:
+Aqio’s work is part of the broader ToadAid mission:
 
 - Build useful tools for the community
 - Support open and transparent public-good infrastructure
