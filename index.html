@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Aqio — ToadAid Builder</title>
   <meta
     name="description"
@@ -206,17 +207,88 @@
     }
 
     .avatar {
-      width: 92px;
-      height: 92px;
-      border-radius: 28px;
+      width: 120px;
+      height: 120px;
+      border-radius: 32px;
+      position: relative;
       display: grid;
       place-items: center;
-      font-size: 44px;
       border: 1px solid rgba(232, 195, 106, 0.28);
       background:
-        radial-gradient(circle at 35% 25%, rgba(232, 195, 106, 0.24), transparent 45%),
+        radial-gradient(circle at 50% 55%, rgba(120, 214, 198, 0.18), transparent 46%),
+        radial-gradient(circle at 35% 25%, rgba(232, 195, 106, 0.22), transparent 45%),
         rgba(244, 241, 223, 0.06);
       box-shadow: 0 20px 70px rgba(0,0,0,0.28);
+      overflow: hidden;
+    }
+
+    .avatar::before {
+      content: "";
+      position: absolute;
+      width: 92px;
+      height: 92px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 48%, rgba(232, 195, 106, 0.34), transparent 16%),
+        conic-gradient(
+          from 0deg,
+          rgba(158, 230, 164, 0.15),
+          rgba(244, 241, 223, 0.68),
+          rgba(232, 195, 106, 0.54),
+          rgba(120, 214, 198, 0.38),
+          rgba(244, 241, 223, 0.68),
+          rgba(158, 230, 164, 0.15)
+        );
+      clip-path: polygon(
+        50% 2%,
+        61% 34%,
+        95% 22%,
+        68% 49%,
+        98% 63%,
+        62% 63%,
+        50% 98%,
+        38% 63%,
+        2% 63%,
+        32% 49%,
+        5% 22%,
+        39% 34%
+      );
+      animation: lotusFloat 5.8s ease-in-out infinite;
+      filter: drop-shadow(0 0 18px rgba(158, 230, 164, 0.22));
+    }
+
+    .avatar::after {
+      content: "";
+      position: absolute;
+      bottom: 22px;
+      width: 76px;
+      height: 14px;
+      border-radius: 50%;
+      background: rgba(120, 214, 198, 0.2);
+      filter: blur(2px);
+      animation: waterPulse 5.8s ease-in-out infinite;
+    }
+
+    @keyframes lotusFloat {
+      0%, 100% {
+        transform: translateY(5px) rotate(-2deg) scale(0.98);
+      }
+
+      50% {
+        transform: translateY(-8px) rotate(2deg) scale(1.04);
+      }
+    }
+
+    @keyframes waterPulse {
+      0%, 100% {
+        transform: scaleX(0.82);
+        opacity: 0.24;
+      }
+
+      50% {
+        transform: scaleX(1.15);
+        opacity: 0.45;
+      }
     }
 
     .card-title {
@@ -377,7 +449,7 @@
       <div class="hero">
         <section class="panel hero-copy">
           <div class="eyebrow">🍃 One builder, one light</div>
-          <h1>Aqio/h1>
+          <h1>Aqio</h1>
           <p class="subtitle">
             A ToadAid builder helping shape public-good tools, agent identity,
             and community infrastructure for the Toadgang ecosystem.
@@ -395,7 +467,7 @@
 
         <aside class="panel builder-card">
           <div>
-            <div class="avatar" aria-hidden="true">🐸</div>
+            <div class="avatar" aria-hidden="true"></div>
             <h2 class="card-title">Builder Presence</h2>
             <p class="card-text">
               This page is Aqio’s public builder home — a small signal of contribution,
