@@ -3,127 +3,454 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Morita</title>
+  <title>Morita — ToadAid Builder</title>
+  <meta
+    name="description"
+    content="Morita — ToadAid builder helping shape public-good tools, agent identity, and community infrastructure for the Toadgang ecosystem."
+  />
+
   <style>
     :root {
-      --bg: #0f172a;
-      --card: #111827;
-      --text: #f8fafc;
-      --muted: #94a3b8;
-      --accent: #7dd3fc;
-      --border: rgba(255, 255, 255, 0.12);
+      --bg: #07140f;
+      --bg-soft: #0d2118;
+      --card: rgba(13, 33, 24, 0.82);
+      --card-2: rgba(18, 46, 34, 0.72);
+      --text: #f4f1df;
+      --muted: #b8c9b8;
+      --leaf: #9ee6a4;
+      --gold: #e8c36a;
+      --water: #78d6c6;
+      --border: rgba(244, 241, 223, 0.14);
+      --shadow: rgba(0, 0, 0, 0.34);
     }
 
     * {
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(125, 211, 252, 0.16), transparent 32%),
-        radial-gradient(circle at bottom right, rgba(167, 139, 250, 0.14), transparent 32%),
-        var(--bg);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       color: var(--text);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
+      background:
+        radial-gradient(circle at 18% 12%, rgba(120, 214, 198, 0.18), transparent 30%),
+        radial-gradient(circle at 85% 20%, rgba(158, 230, 164, 0.12), transparent 28%),
+        radial-gradient(circle at 50% 105%, rgba(232, 195, 106, 0.12), transparent 34%),
+        linear-gradient(180deg, #06110d 0%, #07140f 50%, #030806 100%);
+      overflow-x: hidden;
     }
 
-    main {
-      width: 100%;
-      max-width: 860px;
-      border: 1px solid var(--border);
-      background: rgba(17, 24, 39, 0.72);
-      backdrop-filter: blur(18px);
-      border-radius: 28px;
-      padding: 48px;
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      border: 1px solid var(--border);
-      color: var(--accent);
-      padding: 8px 14px;
-      border-radius: 999px;
-      font-size: 14px;
-      margin-bottom: 28px;
-    }
-
-    h1 {
-      font-size: clamp(42px, 8vw, 82px);
-      line-height: 0.95;
-      margin: 0 0 24px;
-      letter-spacing: -0.06em;
-    }
-
-    p {
-      font-size: clamp(18px, 2.5vw, 23px);
-      line-height: 1.65;
-      color: var(--muted);
-      margin: 0 0 32px;
-      max-width: 680px;
-    }
-
-    .links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 36px;
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(244, 241, 223, 0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(244, 241, 223, 0.025) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.75), transparent);
     }
 
     a {
-      color: var(--text);
+      color: inherit;
       text-decoration: none;
-      border: 1px solid var(--border);
-      padding: 12px 18px;
-      border-radius: 14px;
-      transition: 0.2s ease;
     }
 
-    a:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      transform: translateY(-2px);
+    .wrap {
+      width: min(1080px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 32px 0;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 54px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: var(--muted);
+      font-size: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .sigil {
+      width: 42px;
+      height: 42px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(244, 241, 223, 0.06);
+      box-shadow: 0 12px 40px var(--shadow);
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    nav a,
+    .button {
+      border: 1px solid var(--border);
+      background: rgba(244, 241, 223, 0.055);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      transition: 180ms ease;
+    }
+
+    nav a:hover,
+    .button:hover {
+      border-color: rgba(158, 230, 164, 0.55);
+      color: var(--leaf);
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .panel {
+      border: 1px solid var(--border);
+      background: var(--card);
+      backdrop-filter: blur(20px);
+      border-radius: 32px;
+      box-shadow: 0 28px 90px var(--shadow);
+    }
+
+    .hero-copy {
+      padding: clamp(32px, 6vw, 62px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-copy::after {
+      content: "🍃";
+      position: absolute;
+      right: 34px;
+      bottom: 24px;
+      font-size: 84px;
+      opacity: 0.08;
+      transform: rotate(-18deg);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--leaf);
+      border: 1px solid rgba(158, 230, 164, 0.26);
+      background: rgba(158, 230, 164, 0.06);
+      border-radius: 999px;
+      padding: 8px 13px;
+      font-size: 14px;
+      margin-bottom: 26px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(48px, 9vw, 96px);
+      line-height: 0.9;
+      letter-spacing: -0.075em;
+    }
+
+    .subtitle {
+      margin: 26px 0 0;
+      max-width: 670px;
+      color: var(--muted);
+      font-size: clamp(18px, 2.2vw, 23px);
+      line-height: 1.65;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .button.primary {
+      background: linear-gradient(135deg, rgba(158, 230, 164, 0.22), rgba(120, 214, 198, 0.12));
+      border-color: rgba(158, 230, 164, 0.42);
+      color: var(--leaf);
+    }
+
+    .builder-card {
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 100%;
+      background:
+        linear-gradient(160deg, rgba(232, 195, 106, 0.1), transparent 36%),
+        var(--card-2);
+    }
+
+    .avatar {
+      width: 92px;
+      height: 92px;
+      border-radius: 28px;
+      display: grid;
+      place-items: center;
+      font-size: 44px;
+      border: 1px solid rgba(232, 195, 106, 0.28);
+      background:
+        radial-gradient(circle at 35% 25%, rgba(232, 195, 106, 0.24), transparent 45%),
+        rgba(244, 241, 223, 0.06);
+      box-shadow: 0 20px 70px rgba(0,0,0,0.28);
+    }
+
+    .card-title {
+      margin: 24px 0 10px;
+      font-size: 28px;
+      letter-spacing: -0.035em;
+    }
+
+    .card-text {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+      font-size: 16px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 28px;
+    }
+
+    .tag {
+      color: var(--muted);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 13px;
+      background: rgba(244, 241, 223, 0.04);
+    }
+
+    section {
+      margin-top: 28px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .mini {
+      padding: 24px;
+      min-height: 190px;
+    }
+
+    .mini h2 {
+      margin: 0 0 14px;
+      font-size: 20px;
+      letter-spacing: -0.025em;
+    }
+
+    .mini p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .vow {
+      padding: clamp(30px, 5vw, 52px);
+      text-align: center;
+      background:
+        radial-gradient(circle at center top, rgba(120, 214, 198, 0.12), transparent 35%),
+        var(--card);
+    }
+
+    .vow p {
+      margin: 0 auto;
+      max-width: 760px;
+      color: var(--text);
+      font-size: clamp(21px, 3vw, 32px);
+      line-height: 1.55;
+      letter-spacing: -0.035em;
+    }
+
+    .vow span {
+      display: block;
+      margin-top: 22px;
+      color: var(--muted);
+      font-size: 15px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
     footer {
-      margin-top: 48px;
+      margin-top: 36px;
+      padding: 24px 0 10px;
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
       color: var(--muted);
       font-size: 14px;
     }
 
-    @media (max-width: 640px) {
-      main {
-        padding: 32px 24px;
+    footer a {
+      color: var(--leaf);
+    }
+
+    @media (max-width: 840px) {
+      header {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      nav {
+        justify-content: flex-start;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .wrap {
+        width: min(100% - 24px, 1080px);
+        padding: 20px 0;
+      }
+
+      .hero-copy,
+      .builder-card,
+      .mini,
+      .vow {
+        border-radius: 24px;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .button {
+        text-align: center;
       }
     }
   </style>
 </head>
+
 <body>
-  <main>
-    <div class="badge">🌱 GitHub Pages is alive</div>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="https://toadaid.github.io/" target="_blank" rel="noopener noreferrer">
+        <span class="sigil">🪷</span>
+        <span>ToadAid Builder</span>
+      </a>
 
-    <h1>Morita</h1>
+      <nav aria-label="Main navigation">
+        <a href="https://toadaid.github.io/" target="_blank" rel="noopener noreferrer">ToadAid</a>
+        <a href="https://github.com/aqio97" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </nav>
+    </header>
 
-    <p>
-      A quiet space for building, sharing, and leaving small traces of meaningful work on the open web.
-    </p>
+    <main>
+      <div class="hero">
+        <section class="panel hero-copy">
+          <div class="eyebrow">🍃 One builder, one light</div>
+          <h1>Morita</h1>
+          <p class="subtitle">
+            A ToadAid builder helping shape public-good tools, agent identity,
+            and community infrastructure for the Toadgang ecosystem.
+          </p>
 
-    <div class="links">
-      <a href="https://github.com/qiao" target="_blank" rel="noopener noreferrer">GitHub</a>
-      <a href="mailto:">Contact</a>
-    </div>
+          <div class="actions">
+            <a class="button primary" href="https://github.com/aqio97" target="_blank" rel="noopener noreferrer">
+              View GitHub
+            </a>
+            <a class="button" href="https://toadaid.github.io/" target="_blank" rel="noopener noreferrer">
+              Visit ToadAid
+            </a>
+          </div>
+        </section>
+
+        <aside class="panel builder-card">
+          <div>
+            <div class="avatar" aria-hidden="true">🐸</div>
+            <h2 class="card-title">Builder Presence</h2>
+            <p class="card-text">
+              This page is Morita’s public builder home — a small signal of contribution,
+              patience, and shared progress in the pond.
+            </p>
+          </div>
+
+          <div class="tags" aria-label="Builder tags">
+            <span class="tag">ToadAid</span>
+            <span class="tag">Toadgang</span>
+            <span class="tag">Public Goods</span>
+            <span class="tag">Agent Identity</span>
+          </div>
+        </aside>
+      </div>
+
+      <section class="grid" aria-label="Builder principles">
+        <article class="panel mini">
+          <h2>Build for the community</h2>
+          <p>
+            Useful tools first. Clear paths for newcomers. Infrastructure that helps the pond grow stronger.
+          </p>
+        </article>
+
+        <article class="panel mini">
+          <h2>Preserve the signal</h2>
+          <p>
+            Lore, identity, and public-good work are tended carefully — not rushed, not forgotten.
+          </p>
+        </article>
+
+        <article class="panel mini">
+          <h2>Move with patience</h2>
+          <p>
+            The work is steady. Each contribution becomes part of a longer path.
+          </p>
+        </article>
+      </section>
+
+      <section class="panel vow">
+        <p>
+          “If you’re here to build fast, you may be early.<br />
+          If you’re here to build something that lasts, you’re on time.”
+        </p>
+        <span>ToadAid · Guarding the Lore</span>
+      </section>
+    </main>
 
     <footer>
-      Built with GitHub Pages.
+      <div>Morita — ToadAid Builder</div>
+      <div>
+        Built with GitHub Pages ·
+        <a href="https://toadaid.github.io/" target="_blank" rel="noopener noreferrer">One scroll, one light</a>
+      </div>
     </footer>
-  </main>
+  </div>
 </body>
 </html>
