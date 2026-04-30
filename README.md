@@ -2,7 +2,7 @@
 
 This repository powers Morita’s GitHub Pages site:
 
-https://qiao.github.io
+https://aqio.github.io
 
 ## About
 
